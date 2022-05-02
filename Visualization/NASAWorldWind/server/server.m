@@ -3,8 +3,8 @@ lastSimTime = 0;
 startTime = cputime;
 currentTime = startTime;
 
-addpath 'D:\Installers\Development\github_repo\examples';
-addpath 'D:\Installers\Development\github_repo\src';
+addpath 'examples';
+addpath 'src';
 serverStatus = 0;
 
 % NOTE
@@ -14,19 +14,19 @@ serverStatus = 0;
 %correct creating WebSocket server
 while ~serverStatus
     fprintf('Creating server...\n');
-    server = EchoServer(5969);
-    if server.Status == 1
+    webSocketServer = EchoServer(5969);
+    if webSocketServer.Status == 1
         serverStatus = 1;
     end
 end
 %correct connection client to server
 fprintf('Waitig for client connection...\n');
-while isempty(server.Connections)
+while isempty(webSocketServer.Connections)
     %wait)))
 end
 
 fprintf('Getting client hash code...\n');
-clientCode = server.Connections(1).HashCode; %get hash of client
+clientCode = webSocketServer.Connections(1).HashCode; %get hash of client
 fprintf('Client hash code got succesfully\n');
 
 while (1)
@@ -55,13 +55,13 @@ while (1)
 
         %cyclic data transmit to client
         fprintf('Sending data to client...');
-        server.sendTo(clientCode, sentData);
+        webSocketServer.sendTo(clientCode, sentData);
         pause(0.5);
     catch
         %close & delete WebSocket server
-        server.stop;
-        delete(server);
-        clear server;
+        webSocketServer.stop;
+        delete(webSocketServer);
+        clear webSocketServer;
         status = 0;
 
         break;

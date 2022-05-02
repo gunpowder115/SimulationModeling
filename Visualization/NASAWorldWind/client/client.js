@@ -11,7 +11,7 @@ requirejs(['./WorldWindShim',
 		pathLayer.displayName = "Paths";
 		//Create the path's attributes
 		var pathAttributes = new WorldWind.ShapeAttributes(null);
-		pathAttributes.outlineColor = WorldWind.Color.RED;
+		pathAttributes.outlineColor = WorldWind.Color.BLUE;
 		pathAttributes.interiorColor = new WorldWind.Color(0, 1, 1, 0.5);
 		pathAttributes.drawVerticals = false;
 		//Create the path's highlight attributes
@@ -69,7 +69,7 @@ requirejs(['./WorldWindShim',
 			var path = new WorldWind.Path(pathPositions, null);
 			path.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
 			path.followTerrain = false;
-			path.extrude = false;
+			path.extrude = true;
 			path.useSurfaceShapeFor2D = true;
 			
 			//Assign the path's attributes
