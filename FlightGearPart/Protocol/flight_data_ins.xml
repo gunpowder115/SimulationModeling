@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<PropertyList>
+<generic>
+    <output>
+            <line_separator>newline</line_separator>
+            <var_separator>tab</var_separator>
+			
+			   <chunk>
+				<name>time (sec)</name>
+				<type>float</type>
+				<format>%.4f</format>
+				<node>/sim/time/elapsed-sec</node>
+			   </chunk>
+
+				  <chunk>
+					<name>inertial pitch rate ("q" rad/sec)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/velocities/qi-rad_sec</node>
+				   </chunk>
+			      <chunk>
+				  
+					<name>inertial roll rate ("p" rad/sec)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/velocities/pi-rad_sec</node>
+				   </chunk>
+
+				   <chunk>
+					<name>inertial yaw rate ("r" rad/sec)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/velocities/ri-rad_sec</node>
+				   </chunk>
+				   
+				   <chunk>
+					<name>inertial X accel (body axis) (mps2)</name>
+					<type>float</type>
+					<format>%.5f</format>
+					<node>/fdm/jsbsim/accelerations/vdot-ft_sec2</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+
+				   <chunk>
+					<name>inertial Y accel (body axis) (mps2)</name>
+					<type>float</type>
+					<format>%.5f</format>
+					<node>/fdm/jsbsim/accelerations/udot-ft_sec2</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+
+				   <chunk>
+					<name>inertial Z accel (body axis) (mps2)</name>
+					<type>float</type>
+					<format>%.5f</format>
+					<node>/fdm/jsbsim/accelerations/wdot-ft_sec2</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>gps latitude (rad)</name>
+					<type>float</type>
+					<format>%.10f</format>
+					<node>/instrumentation/gps/indicated-latitude-deg</node>
+					<factor>0.01745329251994329576</factor>  <!-- degrees to radians -->
+				   </chunk>
+
+				   <chunk>
+					<name>gps longitude (rad)</name>
+					<type>float</type>
+					<format>%.10f</format>
+					<node>/instrumentation/gps/indicated-longitude-deg</node>
+					<factor>0.01745329251994329576</factor>  <!-- degrees to radians -->
+				   </chunk>
+
+				   <chunk>
+					<name>gps altitiude (m)</name>
+					<type>float</type>
+					<format>%.3f</format>
+					<node>/instrumentation/gps/indicated-altitude-ft</node>
+					<factor>0.3048</factor>                  <!-- feet to meter -->
+				   </chunk>
+
+				   <chunk>
+					<name>Velocity East ("ve" mps)</name>
+					<type>float</type>
+					<format>%.8f</format>
+					<node>/instrumentation/gps/ew-velocity-msec</node>
+				   </chunk>
+				   
+				   <chunk>
+					<name>Velocity North ("vn" mps)</name>
+					<type>float</type>
+					<format>%.8f</format>
+					<node>/instrumentation/gps/ns-velocity-msec</node>
+				   </chunk>
+
+				   <chunk>
+					<name>Velocity Down ("vd" mps)</name>
+					<type>float</type>
+					<format>%.8f</format>
+					<node>/instrumentation/gps/indicated-vertical-speed</node>
+					<factor>0.00508</factor>                  <!-- fpm to mps -->
+				   </chunk>
+				   
+				<chunk>
+					<name>roll angle (rad)</name>
+					<type>float</type>
+					<format>%.4f</format>
+					<node>/fdm/jsbsim/attitude/roll-rad</node>
+				</chunk>
+				
+				<chunk>
+					<name>pitch angle (rad)</name>
+					<type>float</type>
+					<format>%.3f</format>
+					<node>/fdm/jsbsim/attitude/pitch-rad</node>
+				</chunk>
+				
+				<chunk>
+					<name>heading angle (rad)</name>
+					<type>float</type>
+					<format>%.3f</format>
+					<node>/fdm/jsbsim/attitude/heading-true-rad</node>
+				</chunk>
+				
+				<chunk>
+					<name>altimeter altitude (m)</name>
+					<type>float</type>
+					<format>%.3f</format>
+					<node>/instrumentation/altimeter/indicated-altitude-ft</node>
+					<factor>0.3048</factor>                  <!-- feet to meter -->
+				</chunk>
+				
+				<chunk>
+					<name>variometer vertical speed (mps)</name>
+					<type>float</type>
+					<format>%.3f</format>
+					<node>/instrumentation/vertical-speed-indicator/indicated-speed-mps</node>
+				</chunk>
+				
+				<chunk>
+					<name>ground elevation (m)</name>
+					<type>float</type>
+					<format>%.3f</format>
+					<node>/fdm/jsbsim/position/terrain-elevation-asl-ft</node>
+					<factor>0.3048</factor>                  <!-- feet to meter -->
+				</chunk>
+
+        </output>
+</generic>
+</PropertyList>

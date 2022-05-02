@@ -1,0 +1,276 @@
+<?xml version="1.0"?>
+<PropertyList>
+<generic>
+    <output>
+            <line_separator>newline</line_separator>
+            <var_separator>tab</var_separator>
+			
+			   <chunk>
+				<name>time (sec)</name>
+				<type>float</type>
+				<format>%.4f</format>
+				<node>/sim/time/elapsed-sec</node>
+			   </chunk>
+
+			      <chunk>
+					<name>ECI position X (m)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/position/eci-x-ft</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>ECI position Y (m)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/position/eci-y-ft</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>ECI position Z (m)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/position/eci-z-ft</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>ECEF position X (m)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/position/ecef-x-ft</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>ECEF position Y (m)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/position/ecef-y-ft</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>ECEF position Z (m)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/position/ecef-z-ft</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>Geodesic latitude (deg)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/position/lat-geod-deg</node>
+				   </chunk>
+				   
+				   <chunk>
+					<name>Geodesic altitude (m)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/position/geod-alt-ft</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>Geocentric latitude (deg)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/position/lat-gc-deg</node>
+				   </chunk>
+				   
+				   <chunk>
+					<name>Geocentric longitude (deg)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/position/long-gc-deg</node>
+				   </chunk>
+				   
+				   <chunk>
+					<name>GPS latitude (deg)</name>
+					<type>float</type>
+					<format>%.10f</format>
+					<node>/instrumentation/gps/indicated-latitude-deg</node>
+				   </chunk>
+
+				   <chunk>
+					<name>GPS longitude (deg)</name>
+					<type>float</type>
+					<format>%.10f</format>
+					<node>/instrumentation/gps/indicated-longitude-deg</node>
+				   </chunk>
+
+				   <chunk>
+					<name>GPS altitiude (m)</name>
+					<type>float</type>
+					<format>%.3f</format>
+					<node>/instrumentation/gps/indicated-altitude-ft</node>
+					<factor>0.3048</factor>                  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>ECI velocity X (mps)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/velocities/eci-x-fps</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>ECI velocity Y (mps)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/velocities/eci-y-fps</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>ECI velocity Z (mps)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/velocities/eci-z-fps</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>uBody velocity (mps)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/velocities/uBody-fps</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>vBody velocity (mps)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/velocities/vBody-fps</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>wBody velocity (mps)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/velocities/wBody-fps</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>North velocity (mps)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/velocities/speed-north-fps</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>East velocity (mps)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/velocities/speed-east-fps</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+				   
+				   <chunk>
+					<name>Down velocity (mps)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/velocities/speed-down-fps</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+
+				   <chunk>
+					<name>GPS velocity North (mps)</name>
+					<type>float</type>
+					<format>%.8f</format>
+					<node>/instrumentation/gps/ns-velocity-msec</node>
+				   </chunk>
+
+				   <chunk>
+					<name>GPS velocity East (mps)</name>
+					<type>float</type>
+					<format>%.8f</format>
+					<node>/instrumentation/gps/ew-velocity-msec</node>
+				   </chunk>
+
+				   <chunk>
+					<name>GPS velocity Down (mps)</name>
+					<type>float</type>
+					<format>%.8f</format>
+					<node>/instrumentation/gps/indicated-vertical-speed</node>
+					<factor>0.00508</factor>                  <!-- fpm to mps -->
+				   </chunk>
+
+				<chunk>
+					<name>Roll angle (deg)</name>
+					<type>float</type>
+					<format>%.4f</format>
+					<node>/fdm/jsbsim/attitude/phi-deg</node>
+				</chunk>
+				
+				<chunk>
+					<name>Pitch angle (deg)</name>
+					<type>float</type>
+					<format>%.3f</format>
+					<node>/fdm/jsbsim/attitude/theta-deg</node>
+				</chunk>
+				
+				<chunk>
+					<name>True heading angle (deg)</name>
+					<type>float</type>
+					<format>%.3f</format>
+					<node>/fdm/jsbsim/attitude/psi-deg</node>
+				</chunk>
+				
+				<chunk>
+					<name>inertial pitch rate ("q" rad/sec)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/velocities/qi-rad_sec</node>
+				   </chunk>
+				   
+			      <chunk>
+					<name>inertial roll rate ("p" rad/sec)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/velocities/pi-rad_sec</node>
+				   </chunk>
+
+				   <chunk>
+					<name>inertial yaw rate ("r" rad/sec)</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/fdm/jsbsim/velocities/ri-rad_sec</node>
+				   </chunk>
+				   
+				   <chunk>
+					<name>inertial X accel (body axis) (mps2)</name>
+					<type>float</type>
+					<format>%.5f</format>
+					<node>/fdm/jsbsim/accelerations/vdot-ft_sec2</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+
+				   <chunk>
+					<name>inertial Y accel (body axis) (mps2)</name>
+					<type>float</type>
+					<format>%.5f</format>
+					<node>/fdm/jsbsim/accelerations/udot-ft_sec2</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+
+				   <chunk>
+					<name>inertial Z accel (body axis) (mps2)</name>
+					<type>float</type>
+					<format>%.5f</format>
+					<node>/fdm/jsbsim/accelerations/wdot-ft_sec2</node>
+					<factor>0.3048</factor>  <!-- feet to meter -->
+				   </chunk>
+
+        </output>
+</generic>
+</PropertyList>

@@ -1,0 +1,184 @@
+<?xml version="1.0"?>
+<PropertyList>
+<generic>
+    <output>
+            <line_separator>newline</line_separator>
+            <var_separator>tab</var_separator>
+			<binary_mode>false</binary_mode>
+
+				  <chunk>
+					<name>Mixture</name>
+					<type>float</type>
+					<format>%.4f</format>
+					<node>/controls/engines/engine/mixture</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Primer</name>
+					<type>bool</type>
+					<node>/controls/engines/engine/primer-lever</node>
+				   </chunk>
+				  
+				   <chunk>
+					<name>Throttle</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/controls/engines/engine/throttle</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Parking brake</name>
+					<type>int</type>
+					<node>/controls/gear/brake-parking</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Master Alt</name>
+					<type>bool</type>
+					<node>/controls/switches/master-alt</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Master Battery</name>
+					<type>bool</type>
+					<node>/controls/switches/master-bat</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Magneto</name>
+					<type>int</type>
+					<node>/controls/switches/magnetos</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Starter</name>
+					<type>bool</type>
+					<node>/controls/switches/starter</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Ailerons</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/controls/flight/aileron</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Elevator</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/controls/flight/elevator</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Rudder</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/controls/flight/rudder</node>
+				   </chunk>
+				  
+				   <chunk>
+					<name>Left brake</name>
+					<type>int</type>
+					<node>/controls/gear/brake-left</node>
+				   </chunk>
+				   
+				   <chunk>
+					<name>Right brake</name>
+					<type>int</type>
+					<node>/controls/gear/brake-right</node>
+				   </chunk>
+				   
+        </output>
+		
+		<input>
+			<line_separator>newline</line_separator>
+            <var_separator>tab</var_separator>
+			<binary_mode>false</binary_mode>
+
+				  <chunk>
+					<name>Mixture</name>
+					<type>float</type>
+					<format>%.4f</format>
+					<node>/controls/engines/engine/mixture</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Primer</name>
+					<type>bool</type>
+					<node>/controls/engines/engine/primer-lever</node>
+				   </chunk>
+				  
+				   <chunk>
+					<name>Throttle</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/controls/engines/engine/throttle</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Parking brake</name>
+					<type>int</type>
+					<node>/controls/gear/brake-parking</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Master Alt</name>
+					<type>bool</type>
+					<node>/controls/switches/master-alt</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Master Battery</name>
+					<type>bool</type>
+					<node>/controls/switches/master-bat</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Magneto</name>
+					<type>int</type>
+					<node>/controls/switches/magnetos</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Starter</name>
+					<type>bool</type>
+					<node>/controls/switches/starter</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Ailerons</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/controls/flight/aileron</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Elevator</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/controls/flight/elevator</node>
+				   </chunk>
+				  
+				  <chunk>
+					<name>Rudder</name>
+					<type>float</type>
+					<format>%.6f</format>
+					<node>/controls/flight/rudder</node>
+				   </chunk>
+				  
+				   <chunk>
+					<name>Left brake</name>
+					<type>int</type>
+					<node>/controls/gear/brake-left</node>
+				   </chunk>
+				   
+				   <chunk>
+					<name>Right brake</name>
+					<type>int</type>
+					<node>/controls/gear/brake-right</node>
+				   </chunk>
+
+		</input>
+</generic>
+</PropertyList>
