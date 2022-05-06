@@ -94,6 +94,10 @@ requirejs(['./WorldWindShim',
 			pathFG.highlightAttributes = highlightAttributesFG;
 			pathINS.highlightAttributes = highlightAttributesINS;
 			
+			//Remove all paths from layer
+			pathLayerFG.removeAllRenderables();
+			pathLayerINS.removeAllRenderables();
+			
 			//Add the path to a layer 
 			pathLayerFG.addRenderable(pathFG);
 			pathLayerINS.addRenderable(pathINS);
@@ -119,8 +123,8 @@ requirejs(['./WorldWindShim',
 				console.log("Connection interrupted");
 			}
 			//Add the layer to the WorldWindow's layer list
-			wwd.addLayer(pathLayerFG);
-			wwd.addLayer(pathLayerINS);
+			pathLayerFG.addRenderable(pathFG);
+			pathLayerINS.addRenderable(pathINS);
 
 			//Redraw WorldWindow's layer list
 			wwd.redraw();

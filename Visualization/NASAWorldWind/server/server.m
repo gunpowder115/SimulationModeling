@@ -36,7 +36,8 @@ while (1)
         realTrajMat = matfile('D:\x_real_ins.mat');
         realTraj = realTrajMat.x_real_ins;
 
-        simTime = idealTraj(2, length(idealTraj));
+        trajDataLength = length(idealTraj(1, :));
+        simTime = idealTraj(2, trajDataLength);
         %if unchanging data from .MAT during some time,
         %we consider the MAT-file closed
         if (simTime == lastSimTime)
@@ -45,28 +46,28 @@ while (1)
             lastSimTime = simTime;
             currentTime = startTime;
         end
-        if (currentTime - startTime >= 100)
+        if (currentTime - startTime >= 90)
             fprintf('Time limit without data, stopping server...\n');
             ME = MException('MyComponent', 'MAT-file closed');
             throw(ME);
         end
 
-        sentLatIdeal = rad2deg(idealTraj(9, length(idealTraj)));
-        sentLonIdeal = rad2deg(idealTraj(10, length(idealTraj)));
-        sentAltIdeal = idealTraj(11, length(idealTraj)) - idealTraj(20, length(idealTraj));
-        sentLatReal = rad2deg(realTraj(8, length(realTraj)));
-        sentLonReal = rad2deg(realTraj(9, length(realTraj)));
-        sentAltReal = realTraj(10, length(realTraj)) - idealTraj(20, length(idealTraj));
+        sentLatIdeal = rad2deg(idealTraj(9, trajDataLength));
+        sentLonIdeal = rad2deg(idealTraj(10, trajDataLength));
+        sentAltIdeal = idealTraj(11, trajDataLength) - idealTraj(20, trajDataLength);
+        sentLatReal = rad2deg(realTraj(8, trajDataLength));
+        sentLonReal = rad2deg(realTraj(9, trajDataLength));
+        sentAltReal = realTraj(10, trajDataLength) - idealTraj(20, trajDataLength);
         sentData = sprintf('%f,%f,%f,%f,%f,%f', sentLatIdeal, sentLonIdeal, sentAltIdeal, sentLatReal, sentLonReal, sentAltReal);
         sentData
 
         %cyclic data transmit to client
         fprintf('Sending data to client...\n');
         webSocketServer.sendTo(clientCode, sentData);
-        %pause(0.5);
         pause(0.5);
     catch
         %close & delete WebSocket server
+        webSocketServer.Status;
         webSocketServer.stop;
         delete(webSocketServer);
         clear webSocketServer;
