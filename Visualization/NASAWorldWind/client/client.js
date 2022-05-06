@@ -5,19 +5,29 @@ requirejs(['./WorldWindShim',
               LayerManager) {
         "use strict";
 
-		var pathPositions = [];
+		var pathPositionsFG = [];
+		var pathPositionsINS = [];
 		//Create pathLayer
-		var pathLayer = new WorldWind.RenderableLayer();
-		pathLayer.displayName = "Paths";
+		var pathLayerFG = new WorldWind.RenderableLayer();
+		pathLayerFG.displayName = "Paths from FG";
+		var pathLayerINS = new WorldWind.RenderableLayer();
+		pathLayerINS.displayName = "Paths from INS";
 		//Create the path's attributes
-		var pathAttributes = new WorldWind.ShapeAttributes(null);
-		pathAttributes.outlineColor = WorldWind.Color.BLUE;
-		pathAttributes.interiorColor = new WorldWind.Color(0, 1, 1, 0.5);
-		pathAttributes.drawVerticals = false;
+		var pathAttributesFG = new WorldWind.ShapeAttributes(null);
+		pathAttributesFG.outlineColor = WorldWind.Color.BLUE;
+		pathAttributesFG.interiorColor = new WorldWind.Color(0, 1, 1, 0.5);
+		pathAttributesFG.drawVerticals = false;
+		var pathAttributesINS = new WorldWind.ShapeAttributes(null);
+		pathAttributesINS.outlineColor = WorldWind.Color.RED;
+		pathAttributesINS.interiorColor = new WorldWind.Color(0, 1, 1, 0.5);
+		pathAttributesINS.drawVerticals = false;
 		//Create the path's highlight attributes
-		var highlightAttributes = new WorldWind.ShapeAttributes(pathAttributes);
-		highlightAttributes.outlineColor = WorldWind.Color.RED;
-		highlightAttributes.interiorColor = new WorldWind.Color(1, 1, 1, 0.5);
+		var highlightAttributesFG = new WorldWind.ShapeAttributes(pathAttributesFG);
+		highlightAttributesFG.outlineColor = WorldWind.Color.YELLOW;
+		highlightAttributesFG.interiorColor = new WorldWind.Color(1, 1, 1, 0.5);
+		var highlightAttributesINS = new WorldWind.ShapeAttributes(pathAttributesINS);
+		highlightAttributesINS.outlineColor = WorldWind.Color.YELLOW;
+		highlightAttributesINS.interiorColor = new WorldWind.Color(1, 1, 1, 0.5);
 		
 		// Tell WorldWind to log only warnings and errors.
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
@@ -60,25 +70,33 @@ requirejs(['./WorldWindShim',
 			var arr = event.data.split(',');
 			for (var i = 0; i < arr.length; i++)
 			{ arr[i] = +arr[i]; }
-			console.log(arr);
-			//pathPositions = addingPositions(arr[0], arr[1], arr[2]);
-			pathPositions.push(new WorldWind.Position(arr[0], arr[1], arr[2]));
-			console.log(pathPositions);
+			//console.log(arr);
+			pathPositionsFG.push(new WorldWind.Position(arr[0], arr[1], arr[2]));
+			pathPositionsINS.push(new WorldWind.Position(arr[3], arr[4], arr[5]));
+			console.log(pathPositionsFG);
 			
 			//Create the path
-			var path = new WorldWind.Path(pathPositions, null);
-			path.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-			path.followTerrain = false;
-			path.extrude = true;
-			path.useSurfaceShapeFor2D = true;
+			var pathFG = new WorldWind.Path(pathPositionsFG, null);
+			pathFG.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+			pathFG.followTerrain = true;
+			pathFG.extrude = true;
+			pathFG.useSurfaceShapeFor2D = true;
+			var pathINS = new WorldWind.Path(pathPositionsINS, null);
+			pathINS.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+			pathINS.followTerrain = true;
+			pathINS.extrude = true;
+			pathINS.useSurfaceShapeFor2D = true;
 			
 			//Assign the path's attributes
-			path.attributes = pathAttributes;
+			pathFG.attributes = pathAttributesFG;
+			pathINS.attributes = pathAttributesINS;
 			//Assign the path's highlight attributes
-			path.highlightAttributes = highlightAttributes;
+			pathFG.highlightAttributes = highlightAttributesFG;
+			pathINS.highlightAttributes = highlightAttributesINS;
 			
 			//Add the path to a layer 
-			pathLayer.addRenderable(path);
+			pathLayerFG.addRenderable(pathFG);
+			pathLayerINS.addRenderable(pathINS);
 			
 			// //Add the layer to the WorldWindow's layer list
 			// wwd.addLayer(pathLayer);
@@ -101,7 +119,8 @@ requirejs(['./WorldWindShim',
 				console.log("Connection interrupted");
 			}
 			//Add the layer to the WorldWindow's layer list
-			wwd.addLayer(pathLayer);
+			wwd.addLayer(pathLayerFG);
+			wwd.addLayer(pathLayerINS);
 
 			//Redraw WorldWindow's layer list
 			wwd.redraw();

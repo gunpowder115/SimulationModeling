@@ -31,9 +31,11 @@ fprintf('Client hash code got succesfully\n');
 
 while (1)
     try
-        matObj = matfile('D:\idealTrajMat.mat');
-        idealTraj = matObj.idealTrajData;
-    
+        idealTrajMat = matfile('D:\x_ideal_fg.mat');
+        idealTraj = idealTrajMat.x_ideal_fg;
+        realTrajMat = matfile('D:\x_real_ins.mat');
+        realTraj = realTrajMat.x_real_ins;
+
         simTime = idealTraj(2, length(idealTraj));
         %if unchanging data from .MAT during some time,
         %we consider the MAT-file closed
@@ -43,19 +45,25 @@ while (1)
             lastSimTime = simTime;
             currentTime = startTime;
         end
-        if (currentTime - startTime >= 20)
+        if (currentTime - startTime >= 100)
+            fprintf('Time limit without data, stopping server...\n');
             ME = MException('MyComponent', 'MAT-file closed');
             throw(ME);
         end
 
-        sentData = [ rad2deg(idealTraj(3, length(idealTraj))), rad2deg(idealTraj(4, length(idealTraj))), idealTraj(5, length(idealTraj))];
-        num2str(sentData)
-        sentData = sprintf('%f,%f,%f', rad2deg(idealTraj(3, length(idealTraj))), rad2deg(idealTraj(4, length(idealTraj))), idealTraj(5, length(idealTraj)) - idealTraj(6, length(idealTraj)));
+        sentLatIdeal = rad2deg(idealTraj(9, length(idealTraj)));
+        sentLonIdeal = rad2deg(idealTraj(10, length(idealTraj)));
+        sentAltIdeal = idealTraj(11, length(idealTraj)) - idealTraj(20, length(idealTraj));
+        sentLatReal = rad2deg(realTraj(8, length(realTraj)));
+        sentLonReal = rad2deg(realTraj(9, length(realTraj)));
+        sentAltReal = realTraj(10, length(realTraj)) - idealTraj(20, length(idealTraj));
+        sentData = sprintf('%f,%f,%f,%f,%f,%f', sentLatIdeal, sentLonIdeal, sentAltIdeal, sentLatReal, sentLonReal, sentAltReal);
         sentData
 
         %cyclic data transmit to client
-        fprintf('Sending data to client...');
+        fprintf('Sending data to client...\n');
         webSocketServer.sendTo(clientCode, sentData);
+        %pause(0.5);
         pause(0.5);
     catch
         %close & delete WebSocket server
