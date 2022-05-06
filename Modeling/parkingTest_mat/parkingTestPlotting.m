@@ -1,7 +1,5 @@
 close all
 
-k = 1.4182e-3;
-
 %open mat-files and extract data
 x_ideal_fg_mat = matfile('x_ideal_fg.mat');
 x_ideal_fg = x_ideal_fg_mat.x_ideal_fg;
@@ -65,8 +63,6 @@ pitch_real_ins = x_real_ins(15, :);
 heading_real_ins = x_real_ins(16, :);
 ro_1_real_ins = x_real_ins(17, :);
 ro_2_real_ins = x_real_ins(18, :);
-%result parameters from INS
-lat_ins_result = (lat_real_ins - lat_ideal_fg) * k + lat_ideal_fg;
 
 %plotting
 % требуемый уход за час полёта: 1 NM = 1' = 1/60 градуса = 0.0167 градуса
@@ -76,17 +72,15 @@ lat_ins_result = (lat_real_ins - lat_ideal_fg) * k + lat_ideal_fg;
 %   уход за час полёта составляет 0.00306 градуса = 0.18 NM
 %   при грубых характеристиках датчиков, 
 %   уход за час полёта составляет 0.3202 градуса = 19.2 NM
-lat_ideal_ins_error = (lat_ideal_fg - lat_ideal_ins) .* ro_2_ideal_ins;
-lat_real_ins_error = (lat_ideal_fg - lat_real_ins) .* ro_2_real_ins;
-lon_ideal_ins_error = lon_ideal_fg - lon_ideal_ins;
-lon_real_ins_error = lon_ideal_fg - lon_real_ins;
+lat_ideal_ins_error = (lat_ideal_ins - lat_ideal_fg) .* ro_2_ideal_ins;
+lat_real_ins_error = (lat_real_ins - lat_ideal_fg) .* ro_2_real_ins;
+lon_ideal_ins_error = (lon_ideal_ins - lon_ideal_fg) .* ro_1_real_ins .* cos(lat_ideal_fg);
+lon_real_ins_error = (lon_real_ins - lon_ideal_fg) .* ro_1_real_ins .* cos(lat_real_ins);
 
-vel_e_ideal_ins_error = vel_e_ideal_fg - vel_e_ideal_ins;
-vel_e_real_ins_error = vel_e_ideal_fg - vel_e_real_ins;
-vel_n_ideal_ins_error = vel_n_ideal_fg - vel_n_ideal_ins;
-vel_n_real_ins_error = vel_n_ideal_fg - vel_n_real_ins;
-
-lat_ins_result_error = (lat_ideal_fg - lat_ins_result) .* ro_2_real_ins;
+vel_e_ideal_ins_error = vel_e_ideal_ins - vel_e_ideal_fg;
+vel_e_real_ins_error = vel_e_real_ins - vel_e_ideal_fg;
+vel_n_ideal_ins_error = vel_n_ideal_ins - vel_n_ideal_fg;
+vel_n_real_ins_error = vel_n_real_ins - vel_n_ideal_fg;
 
 figure;
 plot(simTime, lat_ideal_ins_error, 'b');
@@ -95,35 +89,26 @@ plot(simTime, lat_real_ins_error, 'r');
 title('Ошибки по широте (идеал и реал)');
 lat_real_ins_error(length(lat_real_ins_error)) / ro_2_real_ins(length(lat_real_ins_error))
 
-% figure;
-% plot(simTime, lat_ins_result_error, 'r');
-% grid on; hold on;
-% title('Результат ошибки по широте (реал)');
-% figure;
-% plot(simTime, vel_e_ideal_ins_error, 'b');
-% grid on; hold on;
-% plot(simTime, vel_e_real_ins_error, 'r');
-% title('Ошибки по Ve (идеал и реал)');
-% figure;
-% plot(simTime, vel_n_ideal_ins_error, 'b');
-% grid on; hold on;
-% plot(simTime, vel_n_real_ins_error, 'r');
-% title('Ошибки по Vn (идеал и реал)');
+figure;
+plot(simTime, rad2deg(lat_ideal_fg), 'b');
+grid on; hold on;
+plot(simTime, rad2deg(lat_real_ins), 'r');
+title('Широта (идеал и реал)');
 
-% figure;
-% plot(simTime, lon_ideal_ins_error, 'b');
-% grid on; hold on;
-% plot(simTime, lon_real_ins_error, 'r');
-% title('Ошибки по долготе (идеал и реал)');
-% 
-% figure;
-% plot(simTime, lat_ideal_ins, 'b');
-% grid on; hold on;
-% plot(simTime, lat_real_ins, 'r');
-% title('Широта (идеал и реал)');
-% 
-% figure;
-% plot(simTime, lon_ideal_ins, 'b');
-% grid on; hold on;
-% plot(simTime, lon_real_ins, 'r');
-% title('Долгота (идеал и реал)');
+figure;
+plot(simTime, rad2deg(lon_ideal_fg), 'b');
+grid on; hold on;
+plot(simTime, rad2deg(lon_real_ins), 'r');
+title('Долгота (идеал и реал)');
+
+figure;
+plot(simTime, lon_ideal_ins_error, 'b');
+grid on; hold on;
+plot(simTime, lon_real_ins_error, 'r');
+title('Ошибки по долготе (идеал и реал)');
+
+figure;
+plot(simTime, vel_n_ideal_ins_error, 'b');
+grid on; hold on;
+plot(simTime, vel_n_real_ins_error, 'r');
+title('Ошибки по Vn (идеал и реал)');
