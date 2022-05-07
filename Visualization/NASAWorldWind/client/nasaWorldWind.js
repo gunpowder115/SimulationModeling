@@ -7,6 +7,7 @@ requirejs(['./WorldWindShim',
 		var pathPositionsFG = [];
 		var pathPositionsINS = [];
 		var pathPositionsSNS = [];
+		var msgCount = 0;
 		//Create pathLayer
 		var pathLayerFG = new WorldWind.RenderableLayer();
 		pathLayerFG.displayName = "Paths from FG";
@@ -120,6 +121,19 @@ requirejs(['./WorldWindShim',
 			pathLayerINS.addRenderable(pathINS);
 			pathLayerSNS.addRenderable(pathSNS);
 			
+			if (msgCount == 0)
+			{
+				//Add the layer to the WorldWindow's layer list
+				wwd.addLayer(pathLayerFG);
+				wwd.addLayer(pathLayerINS);
+				wwd.addLayer(pathLayerSNS);
+			}
+			
+			//Redraw WorldWindow's layer list
+			wwd.redraw();
+			
+			msgCount = msgCount + 1;
+			
 			// //Add the layer to the WorldWindow's layer list
 			// wwd.addLayer(pathLayer);
 
@@ -140,50 +154,11 @@ requirejs(['./WorldWindShim',
 			{
 				console.log("Connection interrupted");
 			}
-			//Add the layer to the WorldWindow's layer list
-			wwd.addLayer(pathLayerFG);
-			wwd.addLayer(pathLayerINS);
-			wwd.addLayer(pathLayerSNS);
-
-			//Redraw WorldWindow's layer list
-			wwd.redraw();
 		};	
 		socket.onerror = function(error) {
 			console.log("Connection error");
 			console.log(error.message);
-		};
-		
-		//creating and rendering real-time path
-		
-		// //Create the path (added)
-		// var path = new WorldWind.Path(pathPositions, null);
-		// path.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
-		// path.followTerrain = true;
-		// path.extrude = true;
-		// path.useSurfaceShapeFor2D = true;
-		
-		// //Create the path's attributes (added)
-		// var pathAttributes = new WorldWind.ShapeAttributes(null);
-		// pathAttributes.outlineColor = WorldWind.Color.BLUE;
-		// pathAttributes.interiorColor = new WorldWind.Color(0, 1, 1, 0.5);
-		// pathAttributes.drawVerticals = true;
-		// //Assign the path's attributes
-		// path.attributes = pathAttributes;
-		
-		// //Create the path's highlight attributes (added)
-		// var highlightAttributes = new WorldWind.ShapeAttributes(pathAttributes);
-		// highlightAttributes.outlineColor = WorldWind.Color.RED;
-		// highlightAttributes.interiorColor = new WorldWind.Color(1, 1, 1, 0.5);
-		// //Assign the path's highlight attributes
-		// path.highlightAttributes = highlightAttributes;
-		
-		// //Add the path to a layer (added)
-		// var pathLayer = new WorldWind.RenderableLayer();
-		// pathLayer.displayName = "Paths";
-		// pathLayer.addRenderable(path);
-		// //Add the layer to the WorldWindow's layer list
-		// wwd.addLayer(pathLayer);
-		
+		};		
 		
 		//downloading and rendering path from kml-file
 		
