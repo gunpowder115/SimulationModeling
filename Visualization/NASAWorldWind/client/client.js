@@ -132,17 +132,9 @@ requirejs(['./WorldWindShim',
 			
 			//Redraw WorldWindow's layer list
 			wwd.redraw();
+			wwd.goTo(new WorldWind.Location(arr[0], arr[1]));
 			
-			msgCount = msgCount + 1;
-			
-			// //Add the layer to the WorldWindow's layer list
-			// wwd.addLayer(pathLayer);
-
-			// //Redraw WorldWindow's layer list
-			// wwd.redraw();
-			
-			// //Remove pathLayer from the WorldWindow's layer list
-			// wwd.removeLayer(pathLayer);
+			msgCount = msgCount + 1;			
 		};
 		socket.onclose = function(event) {
 			if (event.wasClean)
