@@ -31,13 +31,15 @@ fprintf('Client hash code got succesfully\n');
 
 while (1)
     try
-        idealTrajMat = matfile('D:\x_ideal_fg.mat');
-        idealTraj = idealTrajMat.x_ideal_fg;
-        realTrajMat = matfile('D:\x_real_ins.mat');
-        realTraj = realTrajMat.x_real_ins;
+        traj_FG_mat = matfile('D:\x_ideal_fg.mat');
+        traj_FG = traj_FG_mat.x_ideal_fg;
+        traj_INS_mat = matfile('D:\x_real_ins.mat');
+        traj_INS = traj_INS_mat.x_real_ins;
+        traj_SNS_mat = matfile('D:\x_real_sns.mat');
+        traj_SNS = traj_SNS_mat.x_real_sns;
 
-        trajDataLength = length(idealTraj(1, :));
-        simTime = idealTraj(2, trajDataLength);
+        trajDataLength = length(traj_FG(1, :));
+        simTime = traj_FG(2, trajDataLength);
         %if unchanging data from .MAT during some time,
         %we consider the MAT-file closed
         if (simTime == lastSimTime)
@@ -46,19 +48,23 @@ while (1)
             lastSimTime = simTime;
             currentTime = startTime;
         end
-        if (currentTime - startTime >= 90)
+        if (currentTime - startTime >= 30)
             fprintf('Time limit without data, stopping server...\n');
             ME = MException('MyComponent', 'MAT-file closed');
             throw(ME);
         end
 
-        sentLatIdeal = rad2deg(idealTraj(9, trajDataLength));
-        sentLonIdeal = rad2deg(idealTraj(10, trajDataLength));
-        sentAltIdeal = idealTraj(11, trajDataLength) - idealTraj(20, trajDataLength);
-        sentLatReal = rad2deg(realTraj(8, trajDataLength));
-        sentLonReal = rad2deg(realTraj(9, trajDataLength));
-        sentAltReal = realTraj(10, trajDataLength) - idealTraj(20, trajDataLength);
-        sentData = sprintf('%f,%f,%f,%f,%f,%f', sentLatIdeal, sentLonIdeal, sentAltIdeal, sentLatReal, sentLonReal, sentAltReal);
+        sentLatFG = rad2deg(traj_FG(9, trajDataLength));
+        sentLonFG = rad2deg(traj_FG(10, trajDataLength));
+        sentAltFG = traj_FG(11, trajDataLength) - traj_FG(20, trajDataLength);
+        sentLatINS = rad2deg(traj_INS(8, trajDataLength));
+        sentLonINS = rad2deg(traj_INS(9, trajDataLength));
+        sentAltINS = traj_INS(10, trajDataLength) - traj_FG(20, trajDataLength);
+        sentLatSNS = rad2deg(traj_SNS(2, trajDataLength));
+        sentLonSNS = rad2deg(traj_SNS(3, trajDataLength));
+        sentAltSNS = traj_SNS(4, trajDataLength) - traj_FG(20, trajDataLength);
+
+        sentData = sprintf('%f,%f,%f,%f,%f,%f,%f,%f,%f', sentLatFG, sentLonFG, sentAltFG, sentLatINS, sentLonINS, sentAltINS, sentLatSNS, sentLonSNS, sentAltSNS);
         sentData
 
         %cyclic data transmit to client
