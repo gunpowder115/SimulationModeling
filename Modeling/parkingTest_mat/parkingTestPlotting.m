@@ -7,6 +7,8 @@ x_ideal_ins_mat = matfile('x_ideal_ins.mat');
 x_ideal_ins = x_ideal_ins_mat.x_ideal_ins;
 x_real_ins_mat = matfile('x_real_ins.mat');
 x_real_ins = x_real_ins_mat.x_real_ins;
+x_real_sns_mat = matfile('x_real_sns.mat');
+x_real_sns = x_real_sns_mat.x_real_sns;
 %simulation time from Simulink
 simTime = x_ideal_ins(1, :);
 %ideal parameters from FG
@@ -63,6 +65,13 @@ pitch_real_ins = x_real_ins(15, :);
 heading_real_ins = x_real_ins(16, :);
 ro_1_real_ins = x_real_ins(17, :);
 ro_2_real_ins = x_real_ins(18, :);
+%real parameters from SNS
+lat_real_sns = x_real_sns(2, :);
+lon_real_sns = x_real_sns(3, :);
+alt_real_sns = x_real_sns(4, :);
+vel_e_real_sns = x_real_sns(5, :);
+vel_n_real_sns = x_real_sns(6, :);
+vel_h_real_sns = x_real_sns(7, :);
 
 %plotting
 % требуемый уход за час полёта: 1 NM = 1' = 1/60 градуса = 0.0167 градуса
@@ -112,3 +121,9 @@ plot(simTime, vel_n_ideal_ins_error, 'b');
 grid on; hold on;
 plot(simTime, vel_n_real_ins_error, 'r');
 title('Ошибки по Vn (идеал и реал)');
+
+lat_real_sns_error = (lat_real_sns - lat_ideal_fg) .* ro_2_ideal_ins;
+figure;
+plot(simTime, lat_real_sns_error, 'r');
+grid on; hold on;
+title('СНС ошибка по широте');
