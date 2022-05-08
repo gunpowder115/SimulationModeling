@@ -131,7 +131,7 @@ requirejs(['./WorldWindShim',
 			
 			//Redraw WorldWindow's layer list
 			wwd.redraw();
-			wwd.goTo(new WorldWind.Location(arr[0], arr[1]));
+			wwd.goTo(new WorldWind.Position(arr[0], arr[1], arr[2] + 2000));
 			
 			msgCount = msgCount + 1;			
 		};
