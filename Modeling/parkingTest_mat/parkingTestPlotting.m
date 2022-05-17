@@ -79,6 +79,24 @@ title('Ошибка по скорости Vn X4, м/c');
 legend('Ошибка', 'Оценка ошибки');
 
 figure;
+subplot(2, 2, 1);
+grid on; hold on;
+plot(simTime, lon_error_hat, 'r');
+title('Ошибка по долготе X1, м');
+subplot(2, 2, 2);
+grid on; hold on;
+plot(simTime, lat_error_hat, 'r');
+title('Ошибка по широте X2, м');
+subplot(2, 2, 3);
+grid on; hold on;
+plot(simTime, vel_E_error_hat, 'r');
+title('Ошибка по скорости Ve X3, м/c');
+subplot(2, 2, 4);
+grid on; hold on;
+plot(simTime, vel_N_error_hat, 'r');
+title('Ошибка по скорости Vn X4, м/c');
+
+figure;
 subplot(1, 2, 1);
 plot(simTime, lon_error_hat - lon_error, 'b');
 grid on; hold on;
