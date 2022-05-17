@@ -20,3 +20,6 @@ Visualization/NASAWorldWind/server/x_kalman.mat
 Modeling/x_hat_kalman.mat
 Modeling/x_kalman.mat
 Modeling/p_kalman.mat
+*.docx
+*.pdf
+Literature/Ориентация и навигация подвижных объектов/оглавление.txt

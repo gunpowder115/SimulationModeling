@@ -8,14 +8,17 @@ requirejs(['./WorldWindShim',
 		var pathPositionsFG = [];
 		var pathPositionsINS = [];
 		var pathPositionsSNS = [];
+		var pathPositionsOKF = [];
 		var msgCount = 0;
-		//Create pathLayer
+		//Create pathLayers
 		var pathLayerFG = new WorldWind.RenderableLayer();
 		pathLayerFG.displayName = "Paths from FG";
 		var pathLayerINS = new WorldWind.RenderableLayer();
 		pathLayerINS.displayName = "Paths from INS";
 		var pathLayerSNS = new WorldWind.RenderableLayer();
 		pathLayerSNS.displayName = "Paths from SNS";
+		var pathLayerOKF = new WorldWind.RenderableLayer();
+		pathLayerOKF.displayName = "Paths from OKF";
 		//Create the path's attributes
 		var pathAttributesFG = new WorldWind.ShapeAttributes(null);
 		pathAttributesFG.outlineColor = WorldWind.Color.BLUE;
@@ -29,6 +32,10 @@ requirejs(['./WorldWindShim',
 		pathAttributesSNS.outlineColor = WorldWind.Color.MAGENTA;
 		pathAttributesSNS.interiorColor = new WorldWind.Color(1, 0, 1, 0.5);
 		pathAttributesSNS.drawVerticals = false;
+		var pathAttributesOKF = new WorldWind.ShapeAttributes(null);
+		pathAttributesOKF.outlineColor = WorldWind.Color.GREEN;
+		pathAttributesOKF.interiorColor = new WorldWind.Color(0, 1, 0, 0.5);
+		pathAttributesOKF.drawVerticals = false;
 		//Create the path's highlight attributes
 		var highlightAttributesFG = new WorldWind.ShapeAttributes(pathAttributesFG);
 		highlightAttributesFG.outlineColor = WorldWind.Color.YELLOW;
@@ -39,6 +46,9 @@ requirejs(['./WorldWindShim',
 		var highlightAttributesSNS = new WorldWind.ShapeAttributes(pathAttributesSNS);
 		highlightAttributesSNS.outlineColor = WorldWind.Color.YELLOW;
 		highlightAttributesSNS.interiorColor = new WorldWind.Color(1, 1, 1, 0.5);
+		var highlightAttributesOKF = new WorldWind.ShapeAttributes(pathAttributesOKF);
+		highlightAttributesOKF.outlineColor = WorldWind.Color.YELLOW;
+		highlightAttributesOKF.interiorColor = new WorldWind.Color(1, 1, 1, 0.5);
 		
 		// Tell WorldWind to log only warnings and errors.
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
@@ -84,6 +94,7 @@ requirejs(['./WorldWindShim',
 			pathPositionsFG.push(new WorldWind.Position(arr[0], arr[1], arr[2]));
 			pathPositionsINS.push(new WorldWind.Position(arr[3], arr[4], arr[5]));
 			pathPositionsSNS.push(new WorldWind.Position(arr[6], arr[7], arr[8]));
+			pathPositionsOKF.push(new WorldWind.Position(arr[9], arr[10], arr[11]));
 			console.log(pathPositionsFG);
 			
 			//Create the paths
@@ -102,25 +113,34 @@ requirejs(['./WorldWindShim',
 			pathSNS.followTerrain = true;
 			pathSNS.extrude = true;
 			pathSNS.useSurfaceShapeFor2D = true;
+			var pathOKF = new WorldWind.Path(pathPositionsOKF, null);
+			pathOKF.altitudeMode = WorldWind.RELATIVE_TO_GROUND;
+			pathOKF.followTerrain = true;
+			pathOKF.extrude = true;
+			pathOKF.useSurfaceShapeFor2D = true;
 			
 			//Assign the path's attributes
 			pathFG.attributes = pathAttributesFG;
 			pathINS.attributes = pathAttributesINS;
 			pathSNS.attributes = pathAttributesSNS;
+			pathOKF.attributes = pathAttributesOKF;
 			//Assign the path's highlight attributes
 			pathFG.highlightAttributes = highlightAttributesFG;
 			pathINS.highlightAttributes = highlightAttributesINS;
 			pathSNS.highlightAttributes = highlightAttributesSNS;
+			pathOKF.highlightAttributes = highlightAttributesOKF;
 			
-			//Remove all paths from layer
+			//Remove all paths from all layers
 			pathLayerFG.removeAllRenderables();
 			pathLayerINS.removeAllRenderables();
 			pathLayerSNS.removeAllRenderables();
+			pathLayerOKF.removeAllRenderables();
 			
-			//Add the path to a layer 
+			//Add the paths to a layers
 			pathLayerFG.addRenderable(pathFG);
 			pathLayerINS.addRenderable(pathINS);
 			pathLayerSNS.addRenderable(pathSNS);
+			pathLayerOKF.addRenderable(pathOKF);
 			
 			if (msgCount == 0)
 			{
@@ -128,6 +148,7 @@ requirejs(['./WorldWindShim',
 				wwd.addLayer(pathLayerFG);
 				wwd.addLayer(pathLayerINS);
 				wwd.addLayer(pathLayerSNS);
+				wwd.addLayer(pathLayerOKF);
 			}
 			
 			//Redraw WorldWindow's layer list
