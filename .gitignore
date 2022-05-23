@@ -23,3 +23,16 @@ Modeling/p_kalman.mat
 *.docx
 *.pdf
 Literature/Ориентация и навигация подвижных объектов/оглавление.txt
+*.pdf
+*.djvu
+Literature/Оформление/images/body_frame_in_fg.jpg
+*.pdf
+Literature/Книги/Ориентация и навигация подвижных объектов/оглавление.txt
+Literature/Оформление/images/ECEF_NED_template.png
+Literature/ПОСМОТРЕТЬ ПОТОМ/Презентация пример.pptx
+Literature/Оформление/блок-схемы/client.json
+Literature/Оформление/блок-схемы/client.png
+Literature/Оформление/блок-схемы/FG-simulink.json
+Literature/Оформление/блок-схемы/FG-simulink.png
+Literature/Оформление/блок-схемы/server.json
+Literature/Оформление/блок-схемы/server.png

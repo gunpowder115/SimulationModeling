@@ -49,6 +49,8 @@ requirejs(['./WorldWindShim',
 		var highlightAttributesOKF = new WorldWind.ShapeAttributes(pathAttributesOKF);
 		highlightAttributesOKF.outlineColor = WorldWind.Color.YELLOW;
 		highlightAttributesOKF.interiorColor = new WorldWind.Color(1, 1, 1, 0.5);
+		//variables for show paths 
+		var checkIdealPath, checkINSPath, checkSNSPath, checkOKFPath;
 		
 		// Tell WorldWind to log only warnings and errors.
         WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
@@ -77,7 +79,7 @@ requirejs(['./WorldWindShim',
             layers[l].layer.enabled = layers[l].enabled;
             wwd.addLayer(layers[l].layer);
         }
-		
+				
 		//Connect to server and handle sockets
 		
 		var ws = require("ws");
@@ -135,7 +137,7 @@ requirejs(['./WorldWindShim',
 			pathLayerINS.removeAllRenderables();
 			pathLayerSNS.removeAllRenderables();
 			pathLayerOKF.removeAllRenderables();
-			
+						
 			//Add the paths to a layers
 			pathLayerFG.addRenderable(pathFG);
 			pathLayerINS.addRenderable(pathINS);
@@ -150,6 +152,23 @@ requirejs(['./WorldWindShim',
 				wwd.addLayer(pathLayerSNS);
 				wwd.addLayer(pathLayerOKF);
 			}
+			
+			checkIdealPath = document.getElementById('showIdealPath');
+			checkINSPath = document.getElementById('showINSPath');
+			checkSNSPath = document.getElementById('showSNSPath');
+			checkOKFPath = document.getElementById('showOKFPath');
+			// show ideal path
+			if (checkIdealPath.checked) { pathLayerFG.enabled = true; }
+			else { pathLayerFG.enabled = false; }
+			// show INS path
+			if (checkINSPath.checked) { pathLayerINS.enabled = true; }
+			else { pathLayerINS.enabled = false; }
+			// show SNS path
+			if (checkSNSPath.checked) { pathLayerSNS.enabled = true; }
+			else { pathLayerSNS.enabled = false; }
+			//show kalman path
+			if (checkOKFPath.checked) { pathLayerOKF.enabled = true; }
+			else { pathLayerOKF.enabled = false; }
 			
 			//Redraw WorldWindow's layer list
 			wwd.redraw();
@@ -172,7 +191,7 @@ requirejs(['./WorldWindShim',
 		socket.onerror = function(error) {
 			console.log("Connection error");
 			console.log(error.message);
-		};		
+		};	
 		
 		//downloading and rendering path from kml-file
 		
@@ -185,13 +204,13 @@ requirejs(['./WorldWindShim',
             // wwd.redraw();
         // });
 		
-		
 		//Now set up to handle highlighting
 		var highlightController = new WorldWind.HighlightController(wwd);
 
         // Create a layer manager for controlling layer visibility.
         var layerManager = new LayerManager(wwd);
     });
+	
 },{"ws":2}],2:[function(require,module,exports){
 'use strict';
 
