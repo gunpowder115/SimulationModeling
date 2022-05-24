@@ -31,13 +31,13 @@ fprintf('Client hash code got succesfully\n');
 
 while (1)
     try
-        traj_FG_mat = matfile('D:\x_ideal_fg.mat');
+        traj_FG_mat = matfile('D:\param_log\x_ideal_fg.mat');
         traj_FG = traj_FG_mat.x_ideal_fg;
-        err_INS_mat = matfile('D:\x_error_ins.mat');
+        err_INS_mat = matfile('D:\param_log\x_error_ins.mat');
         err_INS = err_INS_mat.x_error_ins;
-        traj_SNS_mat = matfile('D:\x_real_sns.mat');
+        traj_SNS_mat = matfile('D:\param_log\x_real_sns.mat');
         traj_SNS = traj_SNS_mat.x_real_sns;
-        err_OKF_mat = matfile('D:\x_error_okf.mat');
+        err_OKF_mat = matfile('D:\param_log\x_error_okf.mat');
         err_OKF = err_OKF_mat.x_error_okf;
 
         trajDataLength = length(traj_FG(1, :));
