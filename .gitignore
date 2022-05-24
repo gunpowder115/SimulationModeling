@@ -38,3 +38,6 @@ Literature/Оформление/блок-схемы/server.json
 Literature/Оформление/блок-схемы/server.png
 Modeling/INS_ErrorModel/parkingNavigation_ErrorModel_2019b.slx
 Modeling/INS_ErrorModel/Navigation_ErrorModel.slx
+*.jpg
+*.vsd
+*.~vsd
