@@ -90,6 +90,12 @@ while (1)
         clear webSocketServer;
         status = 0;
 
+        %write all current paths in kml files
+        create_kml_file('traj_ideal', sentLatFG, sentLonFG, sentAltFG);
+        create_kml_file('traj_INS', sentLatINS, sentLonINS, sentAltINS);
+        create_kml_file('traj_SNS', sentLatSNS, sentLonSNS, sentAltSNS);
+        create_kml_file('traj_kalman', sentLatOKF, sentLonOKF, sentAltOKF);
+
         break;
     end
 end

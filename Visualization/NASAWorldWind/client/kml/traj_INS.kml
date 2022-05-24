@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://earth.google.com/kml/2.2'>
+<Document>
+<Placemark>
+   <name>flight</name>
+   <LineString>
+       <extrude>1</extrude>
+       <altitudeMode>absolute</altitudeMode>
+       <coordinates>
+        37.883875,55.419309,1.197000
+       </coordinates>
+   </LineString>
+</Placemark>
+</Document></kml>

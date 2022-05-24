@@ -187,10 +187,12 @@ requirejs(['./WorldWindShim',
 			{
 				console.log("Connection interrupted");
 			}
+			load_all_kml(wwd);
 		};	
 		socket.onerror = function(error) {
 			console.log("Connection error");
 			console.log(error.message);
+			load_all_kml(wwd);
 		};	
 		
 		//downloading and rendering path from kml-file
@@ -210,6 +212,26 @@ requirejs(['./WorldWindShim',
         // Create a layer manager for controlling layer visibility.
         var layerManager = new LayerManager(wwd);
     });
+	
+	//load and render one kml path
+	function load_and_render_kml(filename, wwd) {
+		var kmlFilePromise = new WorldWind.KmlFile(filename, [new WorldWind.KmlTreeVisibility('treeControls', wwd)]);
+        kmlFilePromise.then(function (kmlFile) {
+            var renderableLayer = new WorldWind.RenderableLayer("Surface Shapes");
+            renderableLayer.addRenderable(kmlFile);
+
+            wwd.addLayer(renderableLayer);
+            wwd.redraw();
+        });
+	}
+	
+	//load and render all kml paths
+	function load_all_kml(wwd) {
+		load_and_render_kml('/kml/traj_ideal.kml');
+		load_and_render_kml('/kml/traj_INS.kml');
+		load_and_render_kml('/kml/traj_SNS.kml');
+		load_and_render_kml('/kml/traj_kalman.kml');
+	}
 	
 },{"ws":2}],2:[function(require,module,exports){
 'use strict';
